@@ -19,22 +19,10 @@ pipeline {
         }
 
         stage ('Build') {
-            sh "echo 'shell scripts to build project...'"
-            sh 'mvn clean package'
-        }
-        stage ('Tests') {
-            parallel 'static': {
-                sh "echo 'shell scripts to run static tests...'"
-            },
-            'unit': {
-                sh "echo 'shell scripts to run unit tests...'"
-            },
-            'integration': {
-                sh "echo 'shell scripts to run integration tests...'"
+            steps {    
+                sh "echo 'shell scripts to build project...'"
+                sh 'mvn clean package'
             }
-        }
-        stage ('Deploy') {
-            sh "echo 'shell scripts to deploy to server...'"
         }
     }
 }
