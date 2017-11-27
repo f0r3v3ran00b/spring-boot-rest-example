@@ -2,12 +2,17 @@ node {
  	// Clean workspace before doing anything
     deleteDir()
 
+    tools {
+        maven 'apache-maven-3.3.9'
+    }
+
     try {
         stage ('Clone') {
         	checkout scm
         }
         stage ('Build') {
         	sh "echo 'shell scripts to build project...'"
+            sh 'mvn clean package'
         }
         stage ('Tests') {
 	        parallel 'static': {
